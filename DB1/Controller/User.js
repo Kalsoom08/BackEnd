@@ -15,7 +15,7 @@ router.post('/registerUser', async(req, res)=>{
         res.json(createUser)
     } catch (error) {
         res.json({
-            message: error.message
+            mesage: error.message
         })
     }
 })
