@@ -1,5 +1,13 @@
 // //Conditional Rendering 
 const http = require('http')
+const PORT = 3000
+const fs = require('fs')
+// const server = http.createServer((req,res)=>{
+//     res.writeHead(200, {"Content-Type": "text/plain"})
+//     res.end(`Server Created at ${PORT}`)
+// })
+
+
 // const server = http.createServer((req,res)=>{
 //     if(req.url == '/'){
 //         res.end("Home")
@@ -13,9 +21,9 @@ const http = require('http')
 //server.listen(3000, console.log("Server is Runing at http://localhost:3000"))
 
 ////FS Modules
-const server = http.createServer((req, res)=>{
-}) 
-const fs = require('fs')
+// const server = http.createServer((req, res)=>{
+// }) 
+// 
 // const { error } = require('console')
 //Create
 
@@ -55,7 +63,75 @@ const fs = require('fs')
 //     }
 //     console.log("Deleted");
 // })
-server.listen(3000, console.log("Server is Runing at http://localhost:3000"))
+
+const server = http.createServer((re, res)=>{
+    res.end("200")
+})
+
+// fs.writeFile('file.js', 'Heelo', (err)=>{
+// if(err){
+//     console.log(err);
+// }else{
+//     console.log("Writed!");
+// }
+// })
+
+// fs.readFile("file.js", "utf-8",(err, data)=>{
+// if(data){
+//     console.log(data);
+// }else{
+//     console.log(err);
+// }
+// })
+
+// fs.appendFile("file.js", "Appended", (err)=>{
+//     if(err){
+//         console.log(err);
+//     }else{
+//         console.log("Appended");
+//     }
+// })
+
+// fs.unlink("file.js",(err)=>{
+//     if(err){
+//         console.log(err);
+//     }else{
+//         console.log("Deleted!");
+//     }
+// })
+
+// if(fs.existsSync("script.js")){
+//     console.log(true);
+// }else{
+//     console.log(false);
+// }
+
+// fs.mkdir('Main',(err)=>{
+//     if(err){
+//         console.log(err);
+//     }else{
+//         console.log("Creatd");
+//     }
+// })
+
+// fs.mkdir('Main/Child', (err)=>{
+//      if(err){
+//         console.log(err);
+//     }else{
+//         console.log("Creatd");
+//     }
+//     })
+
+// fs.rename('Main', 'Parent', (err)=>{
+//     if(err){
+//         console.log(err);
+//     }else{
+//         console.log("Renamed");
+//     }
+// })
+
+
+server.listen(3000, console.log(`Server is Runing at http://localhost:${PORT}`))
 
 
 
