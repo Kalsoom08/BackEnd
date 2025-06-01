@@ -1,52 +1,76 @@
 const http = require('http');
-const Port = 3000;
+const { parse } = require('path');
+const url = require("url");
+const Port = 3000; 
 
 const server = http.createServer((req, res) => {
-    const requestURL = new URL(req.url, `http://${req.headers.host}`); // Fixed variable name
-    const Path = requestURL.pathname;
+    const Path = url.parse(req.url, true)
     const method = req.method;
 
-    if (method === "GET") {
-        if (Path === "/") {
-            res.writeHead(200, { "Content-Type": "text/plain" });
-            res.end("Home Page");
-        } else if (Path === "/about") {
-            res.writeHead(200, { "Content-Type": "text/plain" });
-            res.end("About Page");
-        } else {
-            res.writeHead(404, { "Content-Type": "text/plain" });
-            res.end("404 Page Not Found");
+    if (method === 'GET'){
+        if(Path.pathname == '/'){
+            res.writeHead(200, {'Content-Type': 'text/plain'})
+            res.end('Successfully Loaded')
+        }else{
+            res.writeHead(404, {'Content-Type': 'text/plain'})
+            res.end('Not Found')
         }
-    }
+    }else if(method === 'POST'){
+        body = '';
+        req.on('data', (chunk)=>{
+            body+= chunk;
+        })
+        req.on("end", ()=>{
+            const parseBody = JSON.parse(body)
+            res.end(JSON.stringify(parseBody))
+        })
+    }else {
+    res.writeHead(405, { "Content-Type": "text/plain" });
+    res.end(`${method} method is not allowed.`);
+}
 
-    else if (method === "POST") {
-        let body = "";
 
-        req.on("data", (chunk) => {
-            body += chunk;
-        });
+    // if (method === "GET") {
+    //     if (Path.pathname === "/") {
+    //         res.writeHead(200, { "Content-Type": "text/plain" });
+    //         res.end("Home Page");
+    //     } else if (Path.pathname === "/about") {
+    //         res.writeHead(200, { "Content-Type": "text/plain" });
+    //         res.end("About Page");
+    //     } else {
+    //         res.writeHead(404, { "Content-Type": "text/plain" });
+    //         res.end("404 Page Not Found");
+    //     }
+    // }
 
-        req.on("end", () => {
-            try {
-                const parsedBody = JSON.parse(body);
-                res.writeHead(200, { "Content-Type": "application/json" });
-                res.end(JSON.stringify({ response: parsedBody }));
-            } catch (error) {
-                res.writeHead(400, { "Content-Type": "application/json" });
-                res.end(JSON.stringify({ error: "Invalid JSON" }));
-            }
-        });
+    // else if (method === "POST") {
+    //     let body = "";
 
-        req.on("error", (err) => {
-            res.writeHead(500, { "Content-Type": "text/plain" });
-            res.end("Server Error");
-        });
-    }
+    //     req.on("data", (chunk) => {
+    //         body += chunk;
+    //     });
 
-    else {
-        res.writeHead(405, { "Content-Type": "text/plain" });
-        res.end(`${method} method is not allowed.`);
-    }
+    //     req.on("end", () => {
+    //         try {
+    //             const parsedBody = JSON.parse(body);
+    //             res.writeHead(200, { "Content-Type": "application/json" });
+    //             res.end(JSON.stringify({ response: parsedBody }));
+    //         } catch (error) {
+    //             res.writeHead(400, { "Content-Type": "application/json" });
+    //             res.end(JSON.stringify({ error: "Invalid JSON" }));
+    //         }
+    //     });
+
+    //     req.on("error", (err) => {
+    //         res.writeHead(500, { "Content-Type": "text/plain" });
+    //         res.end(err);
+    //     });
+    // }
+
+    // else {
+    //     res.writeHead(405, { "Content-Type": "text/plain" });
+    //     res.end(`${method} method is not allowed.`);
+    // }
 });
 
 server.listen(Port, () => {
