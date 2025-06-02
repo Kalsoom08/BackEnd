@@ -5,29 +5,30 @@ require('dotenv').config();
 
 const PORT = 3000;
 
-//Router Middlewware
+////Router Middlewware
 // router.use((req, res, next)=>{
-//     console.log("Middleware Executed");
+//     console.log(new Date());
 //     next()
 // })
 
-// router.get("/" ,(req,res)=>{
-//     res.send("Helo Helo")
+// router.get('/user',(req, res)=>{
+//     res.json({
+//         message : 'Router Middleware Executed'
+//     })
 // })
-// app.use("/", router)
+
+// //Will run in server when folder str is created
+// app.use('/userID', router)
+
 
 //Error Handeling 
-// app.get('/', (req,res,next)=>{
-//     try {
-//         throw new Error("Error arises")
-//     } catch (error) {
-//         next(error)
-//     }
+// app.get('/error', (req, res)=>{
+//     res.send("Error API executed ")
+//     throw new Error('Errror!')
 // })
 
-// app.use((err, req, res,next )=>{
-//     console.error(err.message);
-//     res.status(500).json({ error: err.message}); 
-
+// app.use((err, req, res, next)=>{
+//     console.log(err.message);
 // })
-app.listen(PORT, ()=>{console.log(`Port is running at http://localhost:3000` );})
+
+// app.listen(PORT, ()=>{console.log(`Port is running at http://localhost:${PORT}/` );})
