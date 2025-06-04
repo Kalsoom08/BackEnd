@@ -5,6 +5,8 @@ const authMiddleware = (req,res,next)=>{
     const authHeader = req.header("Authorization")
     if(!authHeader) return resizeBy.json({Message: "No Token Provided"})
     
+
+    //Verify and Compare
     const token = authHeader.split(" ")[1]
 
     try {
