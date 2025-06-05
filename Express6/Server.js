@@ -7,24 +7,21 @@ app.use(express.json());
 const SECRET_KEY = process.env.SECRET_KEY;
 
 const users = [
-  {'username': 'khan', 'password': 'khan123'}
-]
-
+  { username: 'khan', password: 'khan123' }
+];
 const generateToken = (user)=>{
-  const payload = {username : user.username}
-
-  return jwt.sign(payload, SECRET_KEY, {expiresIn:'7d'})
+  const payload = {username: user.username}
+  jwt.sign(payload, SECRET_KEY, {expiresIn: '10d'})
 }
 
-app.post("/login", (req, res)=>{
-  const {username, password} = req.body
+app.post('/login', (req, res)=>{
+  const {username, password} = req.body;
 
-  const findUser = users.find(user=> user.username == username && user.password == password )
+  const findUser = users.find(user => user.username == username && user.password == password)
+  if(!findUser) return res.json('Invalid')
 
-  if(!findUser) return res.json('Invalid Credentials')
-
-  const token = generateToken(findUser)
-  return res.json(token)
+    const token = generateToken(findUser)
+    return res.json(token)
 })
 
 // app.get('/public', (req, res) => {
