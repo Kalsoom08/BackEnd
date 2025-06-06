@@ -1,0 +1,31 @@
+<!-- emailTemplate.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Email with Form</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, textarea { width: 100%; padding: 8px; margin: 8px 0; }
+    button { padding: 10px 20px; background-color: #28a745; color: white; border: none; }
+    .form-container { border: 1px solid #ddd; padding: 20px; border-radius: 8px; max-width: 500px; }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Contact Us</h2>
+    <form action="" method="">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="your@email.com" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="4" placeholder="Write your message here..." required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
